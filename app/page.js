@@ -1,7 +1,7 @@
 import OrderPage from "./_components/OrderPage.js";
 
 export const metadata = {
-  title: "Al Noor Trader | Order Form",
+  title: "Al Noor Traders | Order Form",
 };
 
 function page() {
