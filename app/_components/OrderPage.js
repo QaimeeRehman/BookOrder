@@ -148,6 +148,8 @@ ${itemsMessage}
     0,
   );
 
+  console.log(quantities[activeCell]);
+
   return (
     <main
       className="min-h-screen w-full overflow-x-hidden bg-slate-50"
@@ -198,7 +200,11 @@ ${itemsMessage}
                 <div className="space-x-3">
                   <button
                     type="button"
-                    disabled={!activeCell || quantities[activeCell] === 0}
+                    disabled={
+                      !activeCell ||
+                      quantities[activeCell] === undefined ||
+                      quantities[activeCell] === 0
+                    }
                     onClick={decQuantity}
                     className="
                     h-9
