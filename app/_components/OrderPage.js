@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart } from "lucide-react";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 
 const BUSINESS_WHATSAPP = "923222800880";
 
@@ -72,6 +72,16 @@ export default function OrderPage() {
     setQuantities((prev) => ({
       ...prev,
       [activeCell]: (prev[activeCell] || 0) + 1,
+    }));
+  }
+  function decQuantity() {
+    if (!activeCell) return;
+
+    if (quantities[activeCell] === 0) return;
+
+    setQuantities((prev) => ({
+      ...prev,
+      [activeCell]: (prev[activeCell] || 0) - 1,
     }));
   }
 
@@ -185,11 +195,12 @@ ${itemsMessage}
                 </div>
 
                 {/* SINGLE ADD BUTTON */}
-                <button
-                  type="button"
-                  disabled={!activeCell}
-                  onClick={addQuantity}
-                  className="
+                <div className="space-x-3">
+                  <button
+                    type="button"
+                    disabled={!activeCell || quantities[activeCell] === 0}
+                    onClick={decQuantity}
+                    className="
                     h-9
                     shrink-0
                     rounded-lg
@@ -206,9 +217,34 @@ ${itemsMessage}
                     sm:px-5
                     sm:text-sm
                   "
-                >
-                  Add
-                </button>
+                  >
+                    <Minus size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    disabled={!activeCell}
+                    onClick={addQuantity}
+                    className="
+                    h-9
+                    shrink-0
+                    rounded-lg
+                    bg-slate-900
+                    px-4
+                    text-xs
+                    font-semibold
+                    text-white
+                    transition
+                    active:scale-95
+                    disabled:cursor-not-allowed
+                    disabled:opacity-30
+                    sm:h-10
+                    sm:px-5
+                    sm:text-sm
+                    "
+                  >
+                    <Plus size={18} />
+                  </button>
+                </div>
               </div>
 
               {/* TABLE */}
