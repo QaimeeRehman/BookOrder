@@ -173,7 +173,7 @@ ${itemsMessage}
       className="min-h-screen w-full overflow-x-hidden bg-slate-50"
       onClick={() => setActiveCell(null)}
     >
-      <div className="mx-auto w-full max-w-6xl px-2 py-4 sm:px-4 sm:py-6 lg:px-6">
+      <div className="mx-auto w-full max-w-lg px-2 py-4 sm:px-4 sm:py-6 lg:px-6">
         {/* HEADER */}
         <div className="mb-4 flex items-center justify-between gap-2 sm:mb-6">
           <div className="min-w-0">
@@ -305,7 +305,7 @@ ${itemsMessage}
                           className="
                             w-[14%]
                             border-b
-                            border-slate-200
+                            border-slate-400
                             px-0.5
                             py-2.5
                             text-center
