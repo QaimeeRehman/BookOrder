@@ -77,12 +77,20 @@ export default function OrderPage() {
   function decQuantity() {
     if (!activeCell) return;
 
-    if (quantities[activeCell] === 0) return;
+    setQuantities((prev) => {
+      const currentQuantity = prev[activeCell] || 0;
 
-    setQuantities((prev) => ({
-      ...prev,
-      [activeCell]: (prev[activeCell] || 0) - 1,
-    }));
+      if (currentQuantity <= 1) {
+        const updated = { ...prev };
+        delete updated[activeCell];
+        return updated;
+      }
+
+      return {
+        ...prev,
+        [activeCell]: currentQuantity - 1,
+      };
+    });
   }
 
   function handleCustomerChange(e) {
@@ -97,15 +105,27 @@ export default function OrderPage() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const items = Object.entries(quantities).map(([key, quantity]) => {
-      const [product, column] = key.split("__");
+    // const items = Object.entries(quantities).map(([key, quantity]) => {
+    //   const [product, column] = key.split("__");
 
-      return {
-        product,
-        column,
-        quantity,
-      };
-    });
+    //   return {
+    //     product,
+    //     column,
+    //     quantity,
+    //   };
+    // });
+
+    const items = Object.entries(quantities)
+      .map(([key, quantity]) => {
+        const [product, column] = key.split("__");
+
+        return {
+          product,
+          column,
+          quantity: Number(quantity),
+        };
+      })
+      .filter((item) => item.quantity > 0);
 
     if (items.length === 0) {
       alert("Please select at least one product.");
@@ -147,8 +167,6 @@ ${itemsMessage}
     (sum, quantity) => sum + quantity,
     0,
   );
-
-  console.log(quantities[activeCell]);
 
   return (
     <main
