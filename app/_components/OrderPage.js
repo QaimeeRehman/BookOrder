@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 
-const BUSINESS_WHATSAPP = "923222800880";
+const BUSINESS_WHATSAPP = "923003400605";
 
 const orderSections = [
   {
